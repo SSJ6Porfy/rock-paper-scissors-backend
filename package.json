@@ -1,0 +1,19 @@
+{
+  "name": "gimme5-backend",
+  "version": "0.1.0",
+  "description": "The Backend Service for Gimme5",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [],
+  "author": "Porfirio A. Matias",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.18.0",
+    "express": "4.16.3",
+    "passport": "0.4.0",
+    "webpack": "4.16.4",
+    "webpack-cli": "3.1.0"
+  }
+}
