@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const jwt = require('jsonwebtoken');
 
 // Users Model and Schema 
 
-const UsersSchema = new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         required: [true, 'Username cannot be blank'],
@@ -26,6 +27,19 @@ const UsersSchema = new Schema({
     }
 });
 
-const User = mongoose.model('users', UsersSchema);
+
+UserSchema.methods.generateToken = function () {
+    const user = this;
+  
+    // 1 week expiration
+    const token = jwt.sign(
+      { _id: user._id }, 
+      process.env.JWT_TOKEN || 'supersecretkey', 
+      { expiresIn: 604800 }
+    );
+    return `JWT ${token}`;
+  };
+
+const User = mongoose.model('users', UserSchema);
 
 module.exports = User;
