@@ -24,7 +24,9 @@ const UserSchema = new Schema({
         type: Number,
         required: [true, 'Losses cannot be blank'],
         default: 0
-    }
+    },
+    created_at: Date,
+    updated_at: Date
 });
 
 

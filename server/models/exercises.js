@@ -23,7 +23,9 @@ const ExerciseSchema = new Schema({
         type: Boolean,
         required: [true, 'complete cannot be blank'],
         default: false
-    }
+    },
+    created_at: Date,
+    updated_at: Date
 });
 
 const Exercise = mongoose.model('exercises', ExerciseSchema);
