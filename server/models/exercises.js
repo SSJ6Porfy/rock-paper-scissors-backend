@@ -6,9 +6,9 @@ const ExerciseSchema = new Schema({
         type: String,
         required: [true, 'Owner Id cannot be blank']
     },
-    winner_id: {
+    opponent_id: {
         type: String,
-        required: [true, 'Winner Id cannot be blank']
+        required: [true, 'Opponent Id cannot be blank']
     },
     type: {
         type: String,

@@ -11,7 +11,7 @@ const GameSchema = new Schema({
         required: [true, 'Owner Id cannot be blank']
     },
     moves: {
-        type: String
+        type: Array
     },
     complete: {
         type: Boolean,
@@ -20,7 +20,6 @@ const GameSchema = new Schema({
     },
     winner: {
         type: String,
-        required: [true, 'Owner Id cannot be blank']
     },
     created_at: Date,
     updated_at: Date
