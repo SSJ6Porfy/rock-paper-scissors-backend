@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ExerciseSchema = new Schema({
-    owner_id: {
+    ownerId: {
         type: String,
         required: [true, 'Owner Id cannot be blank']
     },
-    opponent_id: {
+    opponentId: {
         type: String,
         required: [true, 'Opponent Id cannot be blank']
     },
@@ -14,7 +14,7 @@ const ExerciseSchema = new Schema({
         type: String,
         required: [true, 'Type cannot be blank']
     },
-    balance_owed: {
+    balanceOwed: {
         type: Number,
         required: [true, 'Balance Owed cannot be blank'],
         default: 0
@@ -24,8 +24,8 @@ const ExerciseSchema = new Schema({
         required: [true, 'complete cannot be blank'],
         default: false
     },
-    created_at: Date,
-    updated_at: Date
+    createdAt: Date,
+    updatedAt: Date
 });
 
 const Exercise = mongoose.model('exercises', ExerciseSchema);

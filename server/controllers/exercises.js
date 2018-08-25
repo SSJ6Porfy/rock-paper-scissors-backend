@@ -1,12 +1,12 @@
 const Exercise = require("../models/exercises");
 
-const exercise_create = function (req, res) {
+const exerciseCreate = function (req, res) {
     
     let exercise = new Exercise({
-        owner_id: req.body.ownerId,
-        opponent_id: req.body.opponentId,
+        ownerId: req.body.ownerId,
+        opponentId: req.body.opponentId,
         type: req.body.type,
-        balance_owed: req.body.balanceOwed    
+        balanceOwed: req.body.balanceOwed    
     });
 
     exercise.save(function (err) {
@@ -17,7 +17,7 @@ const exercise_create = function (req, res) {
     });
 };
 
-const exercise_show = function (req, res) {
+const exerciseShow = function (req, res) {
 
     let id = req.body.id;
 
@@ -31,6 +31,6 @@ const exercise_show = function (req, res) {
 
 
 module.exports = {
-    exercise_create,
-    exercise_show
+    exerciseCreate,
+    exerciseShow
 }

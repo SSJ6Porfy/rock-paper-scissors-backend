@@ -1,10 +1,10 @@
 const Game = require("../models/games");
 
-const game_create = function (req, res) {
+const gameCreate = function (req, res) {
     
     let game = new Game({
-        player_one_id: req.body.playerOneId,
-        player_two_id: req.body.playerTwoId,    
+        playerOneId: req.body.playerOneId,
+        playerTwoId: req.body.playerTwoId,    
     });
 
     game.save(function (err) {
@@ -15,7 +15,7 @@ const game_create = function (req, res) {
     });
 };
 
-const game_show = function (req, res) {
+const gameShow = function (req, res) {
 
     let id = req.body.id;
 
@@ -29,6 +29,6 @@ const game_show = function (req, res) {
 
 
 module.exports = {
-    game_create,
-    game_show
+    gameCreate,
+    gameShow
 }

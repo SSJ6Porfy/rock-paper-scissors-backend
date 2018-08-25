@@ -1,8 +1,8 @@
 const User = require("../models/users");
 
-const user_create = function (req, res) {
+const userCreate = function (req, res) {
     let user = new User({
-            username: req.body.username,
+            userName: req.body.username,
             email: req.body.email
         }
     );
@@ -15,7 +15,7 @@ const user_create = function (req, res) {
     });
 };
 
-const user_show = function (req, res) {
+const userShow = function (req, res) {
 
     let id = req.body.id;
 
@@ -29,6 +29,6 @@ const user_show = function (req, res) {
 
 
 module.exports = {
-    user_create,
-    user_show
+    userCreate,
+    userShow
 }

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 // Users Model and Schema 
 
 const UserSchema = new Schema({
-    username: {
+    userName: {
         type: String,
         required: [true, 'Username cannot be blank'],
         unique: true
@@ -25,8 +25,8 @@ const UserSchema = new Schema({
         required: [true, 'Losses cannot be blank'],
         default: 0
     },
-    created_at: Date,
-    updated_at: Date
+    createdAt: Date,
+    updatedAt: Date
 });
 
 

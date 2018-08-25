@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const GameSchema = new Schema({
-    player_one_id: {
+    playerOneId: {
         type: String,
         required: [true, 'Owner Id cannot be blank']
     },
-    player_two_id: {
+    playerTwoId: {
         type: String,
         required: [true, 'Owner Id cannot be blank']
     },
@@ -21,8 +21,8 @@ const GameSchema = new Schema({
     winner: {
         type: String,
     },
-    created_at: Date,
-    updated_at: Date
+    createdAt: Date,
+    updatedAt: Date
 });
 
 const Game = mongoose.model('games', GameSchema);
