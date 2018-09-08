@@ -4,11 +4,18 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var path = require('path');
-var ejs = require('ejs');
 var http = require('http');
+const mongoose = require('mongoose');
 
 // Set up the express app
 var app = express();
+
+let dev_db_url = 'mongodb://localhost:27017/gimme5';
+const mongoDB = process.env.MONGODB_URI || dev_db_url;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.set('port', process.env.PORT || 8000);
 
@@ -26,22 +33,11 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-require('./server/config/passport')(passport);
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./server/routes')(app);
 
-var MongoClient = require('mongodb').MongoClient, 
-    assert = require('assert');
-
-// Connection URL
-var url = 'mongodb://localhost:27017/gimme5';
-// Use connect method to connect to the Server
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  console.log(db);
-
-  db.close();
+http.createServer(app).listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
 });

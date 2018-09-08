@@ -1,6 +1,12 @@
 const User = require("../models/users");
 
-const userCreate = function (req, res) {
+const index = function (req, res) {
+    User.find({}).then(function (users) {
+        res.send(users);
+    });
+};
+
+const create = function (req, res) {
     let user = new User({
             userName: req.body.username,
             email: req.body.email
@@ -15,7 +21,7 @@ const userCreate = function (req, res) {
     });
 };
 
-const userShow = function (req, res) {
+const show = function (req, res) {
 
     let id = req.body.id;
 
@@ -29,6 +35,7 @@ const userShow = function (req, res) {
 
 
 module.exports = {
-    userCreate,
-    userShow
+    create,
+    index,
+    show
 }

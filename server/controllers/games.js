@@ -1,6 +1,12 @@
 const Game = require("../models/games");
 
-const gameCreate = function (req, res) {
+const index = function (req, res) {
+    Game.find({}).then(function (games) {
+        res.send(games);
+    });
+};
+
+const create = function (req, res) {
     
     let game = new Game({
         playerOneId: req.body.playerOneId,
@@ -15,7 +21,7 @@ const gameCreate = function (req, res) {
     });
 };
 
-const gameShow = function (req, res) {
+const show = function (req, res) {
 
     let id = req.body.id;
 
@@ -29,6 +35,7 @@ const gameShow = function (req, res) {
 
 
 module.exports = {
-    gameCreate,
-    gameShow
+    create,
+    index,
+    show
 }

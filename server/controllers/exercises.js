@@ -1,6 +1,12 @@
 const Exercise = require("../models/exercises");
 
-const exerciseCreate = function (req, res) {
+const index = function (req, res) {
+    Exercise.find({}).then(function (exercises) {
+        res.send(exercises);
+    });
+};
+
+const create = function (req, res) {
     
     let exercise = new Exercise({
         ownerId: req.body.ownerId,
@@ -17,7 +23,7 @@ const exerciseCreate = function (req, res) {
     });
 };
 
-const exerciseShow = function (req, res) {
+const show = function (req, res) {
 
     let id = req.body.id;
 
@@ -31,6 +37,7 @@ const exerciseShow = function (req, res) {
 
 
 module.exports = {
-    exerciseCreate,
-    exerciseShow
+    create,
+    index,
+    show
 }
