@@ -35,6 +35,17 @@ const show = function (req, res) {
     });
 };
 
+const destroy = function (req, res) {
+    let id = req.params.exerciseId;
+
+    Exercise.findByIdAndRemove(id, function(err) {
+        if (err) {
+            return res.status(401).send(err);
+        }
+        res.status(200).send(`Exercise with id: ${id} has been deleted`);
+    });    
+};
+
 
 module.exports = {
     create,
