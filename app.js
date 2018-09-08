@@ -6,7 +6,6 @@ var passport = require('passport');
 var path = require('path');
 var ejs = require('ejs');
 var http = require('http');
-var db = require('./server/models');
 
 // Set up the express app
 var app = express();
