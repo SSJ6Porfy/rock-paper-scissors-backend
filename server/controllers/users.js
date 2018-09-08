@@ -8,16 +8,16 @@ const index = function (req, res) {
 
 const create = function (req, res) {
     let user = new User({
-            userName: req.body.username,
+            userName: req.body.userName,
             email: req.body.email
         }
     );
 
     user.save(function (err) {
         if (err) {
-            return next(err);
+            return res.status(401).send(err);
         }
-        res.send('User Created successfully')
+        res.send('User Created successfully');
     });
 };
 
@@ -25,9 +25,9 @@ const show = function (req, res) {
 
     let id = req.body.id;
 
-    User.findById(id, function(error, user) {
-        if (error) {
-            next(err)
+    User.findById(id, function(err, user) {
+        if (err) {
+            return res.status(401).send(err);
         }
         res.send(user);
     });

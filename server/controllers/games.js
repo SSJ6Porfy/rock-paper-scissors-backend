@@ -15,7 +15,7 @@ const create = function (req, res) {
 
     game.save(function (err) {
         if (err) {
-            return next(err);
+            return res.status(401).send(err);
         }
         res.send(game);
     });
@@ -25,9 +25,9 @@ const show = function (req, res) {
 
     let id = req.body.id;
 
-    Game.findById(id, function(error, game) {
-        if (error) {
-            next(err)
+    Game.findById(id, function(err, game) {
+        if (err) {
+            return res.status(401).send(err);
         }
         res.send(game);
     });

@@ -17,7 +17,7 @@ const create = function (req, res) {
 
     exercise.save(function (err) {
         if (err) {
-            return next(err);
+            return res.status(401).send(err);
         }
         res.send(exercise);
     });
@@ -27,9 +27,9 @@ const show = function (req, res) {
 
     let id = req.body.id;
 
-    Exercise.findById(id, function(error, exercise) {
-        if (error) {
-            next(err)
+    Exercise.findById(id, function(err, exercise) {
+        if (err) {
+            return res.status(401).send(err);
         }
         res.send(exercise);
     });
