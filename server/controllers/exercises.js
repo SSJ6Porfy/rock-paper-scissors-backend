@@ -12,7 +12,9 @@ const create = function (req, res) {
         ownerId: req.body.ownerId,
         opponentId: req.body.opponentId,
         type: req.body.type,
-        balanceOwed: req.body.balanceOwed    
+        balanceOwed: req.body.balanceOwed,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
     });
 
     exercise.save(function (err) {
@@ -46,9 +48,24 @@ const destroy = function (req, res) {
     });    
 };
 
+const update = function (req, res) {
+    let id = req.params.exerciseId;
+    
+    req.body.updatedAt = Date.now();
+
+    Exercise.findByIdAndUpdate(id, { $set: req.body }, { new: true }, function (err, exercise) {
+        if (err) {
+            return res.status(401).send(err);
+        }
+        res.send(exercise);
+    });
+};
+
 
 module.exports = {
     create,
+    destroy,
     index,
-    show
+    show,
+    update
 }

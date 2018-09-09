@@ -9,7 +9,9 @@ const index = function (req, res) {
 const create = function (req, res) {
     let user = new User({
             userName: req.body.userName,
-            email: req.body.email
+            email: req.body.email,
+            createdAt: Date.now(),
+            updatedAt: Date.now()
         }
     );
 
@@ -35,7 +37,7 @@ const show = function (req, res) {
 const destroy = function (req, res) {
     let id = req.params.userId;
 
-    User.findByIdAndRemove(id, function(err, user) {
+    User.findByIdAndRemove(id, function(err) {
         if (err) {
             return res.status(401).send(err);
         }
@@ -43,10 +45,22 @@ const destroy = function (req, res) {
     });    
 };
 
+const update = function (req, res) {
+    let id = req.params.userId;
+    req.body.updatedAt = Date.now();
+
+    User.findByIdAndUpdate(id, { $set: req.body }, { new: true }, function (err, user) {
+        if (err) {
+            return res.status(401).send(err);
+        }
+        res.send(user);
+    });
+};
 
 module.exports = {
     create,
     destroy,
     index,
-    show
+    show,
+    update
 }

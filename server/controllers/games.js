@@ -9,7 +9,9 @@ const index = function (req, res) {
 const create = function (req, res) {
     let game = new Game({
         playerOneId: req.body.playerOneId,
-        playerTwoId: req.body.playerTwoId,    
+        playerTwoId: req.body.playerTwoId,
+        createdAt: Date.now(),
+        updatedAt: Date.now() 
     });
 
     game.save(function (err) {
@@ -42,10 +44,24 @@ const destroy = function (req, res) {
     });    
 };
 
+const update = function (req, res) {
+    let id = req.params.gameId;
+    
+    req.body.updatedAt = Date.now();
+
+    Game.findByIdAndUpdate(id, { $set: req.body }, { new: true }, function (err, game) {
+        if (err) {
+            return res.status(401).send(err);
+        }
+        res.send(game);
+    });
+};
+
 
 module.exports = {
     create,
     destroy,
     index,
-    show
+    show,
+    update
 }
