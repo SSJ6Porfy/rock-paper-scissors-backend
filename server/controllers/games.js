@@ -10,6 +10,7 @@ const create = function (req, res) {
     let game = new Game({
         playerOneId: req.body.playerOneId,
         playerTwoId: req.body.playerTwoId,
+        moves: req.body.moves,
         createdAt: Date.now(),
         updatedAt: Date.now() 
     });
