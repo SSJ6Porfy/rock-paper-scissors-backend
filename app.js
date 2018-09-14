@@ -1,10 +1,11 @@
 var express = require('express');
-// var session = require("express-session");
+var session = require("express-session");
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
 var http = require('http');
 const mongoose = require('mongoose');
+var passport = require('passport');
 
 // Set up the express app
 var app = express();
@@ -18,12 +19,15 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.set('port', process.env.PORT || 8000);
 
-// app.use(session({ 
-//     secret: "myreallybigsecret",
-//     proxy: true,
-//     resave: true,
-//     saveUninitialized: true
-// }));
+app.use(session({ 
+    secret: "myreallybigsecret",
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
   
 // Log requests to the console.
 app.use(logger('dev'));

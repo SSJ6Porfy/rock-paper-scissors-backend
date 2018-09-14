@@ -2,7 +2,10 @@ const usersController = require('../controllers').users;
 const gamesController = require('../controllers').games;
 const exercisesController = require('../controllers').exercises;
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+var express = require('express');
+var passportFacebook = require('../auth/facebook');
+var passportGoogle = require('../auth/google');
+
 
 module.exports = (app) => {
 
