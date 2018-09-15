@@ -1,4 +1,4 @@
-const Exercise = require("../models/exercises");
+const Exercise = require("../models/Exercise");
 
 const index = function (req, res) {
     Exercise.find({}).then(function (exercises) {

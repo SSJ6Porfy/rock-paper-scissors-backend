@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 // Users Model and Schema 
 
 const UserSchema = new Schema({
-    userName: {
+    id: {
         type: String,
-        required: [true, 'Username cannot be blank'],
+        required: [true, 'Facebook or Google Profile ID cannot be blank'],
         unique: true
     },
     email: {

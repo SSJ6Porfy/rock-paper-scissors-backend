@@ -1,4 +1,4 @@
-const Game = require("../models/games");
+const Game = require("../models/Game");
 
 const index = function (req, res) {
     Game.find({}).then(function (games) {
