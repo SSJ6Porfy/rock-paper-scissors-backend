@@ -2,13 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken');
 
-// Users Model and Schema 
+// Users Model and Schema
 
 const UserSchema = new Schema({
-    id: {
+    google: {
+        id: {
+            type: String
+        }
+    },
+    facebook: {
+        id: {
+            type: String
+        }
+    },
+    method: {
         type: String,
-        required: [true, 'Facebook or Google Profile ID cannot be blank'],
-        unique: true
+        enum: ['google', 'facebook'],
+        required: true
     },
     email: {
         type: String,
@@ -29,18 +39,19 @@ const UserSchema = new Schema({
     updatedAt: Date
 });
 
-
 UserSchema.methods.generateToken = function () {
-    const user = this;
-  
     // 1 week expiration
-    const token = jwt.sign(
-      { _id: user._id }, 
-      process.env.JWT_TOKEN || 'supersecretkey', 
-      { expiresIn: 604800 }
-    );
-    return `JWT ${token}`;
-  };
+    const user = this;
+
+    const token = jwt.sign({
+        iss: 'gimme5socialFitness',
+        sub: user._id,
+        iat: new Date().getTime(), // current time
+        exp: new Date().setDate(new Date().getDate() + 6) // current time + 1 day ahead
+    }, process.env.JWT_SECRET);
+
+    return token;
+};
 
 const User = mongoose.model('users', UserSchema);
 

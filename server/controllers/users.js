@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const User = require("../models/User");
 
 const index = function (req, res) {
@@ -57,9 +58,36 @@ const update = function (req, res) {
     });
 };
 
+const generateToken = function (user) {
+    // 1 week expiration
+
+    const token = jwt.sign({
+        iss: 'gimme5socialFitness',
+        sub: user._id,
+        iat: new Date().getTime(), // current time
+        exp: new Date().setDate(new Date().getDate() + 6) // current time + 1 day ahead
+    }, process.env.JWT_SECRET);
+
+    return token;
+};
+
+const googleOAuth = async function(req, res, next) {
+    // Generate token
+    const token = generateToken(req.user);
+    res.status(200).json({ token });
+};
+
+const facebookOAuth = async function(req, res, next) {
+    // Generate token
+    const token = generateToken(req.user);
+    res.status(200).json({ token });
+}
+
 module.exports = {
     create,
     destroy,
+    facebookOAuth,
+    googleOAuth,
     index,
     show,
     update
