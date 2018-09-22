@@ -9,7 +9,7 @@ const authenticate = passport.authenticate('jwt', { session: false });
 
 module.exports = (app) => {
 
-    // Oauth Verifications
+    // Oauth Verification Routes
     app.post('/oauth/google', passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth);
     app.post('/oauth/facebook', passport.authenticate('facebookToken', { session: false }), UsersController.facebookOAuth);
 
